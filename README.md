@@ -21,7 +21,7 @@
 - [Contributing](#contributing)
 - [License](#license)
 
-!-- CONTRIBUTING -->
+<!-- CONTRIBUTING -->
 
 ### Built With
 
