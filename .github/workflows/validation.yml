@@ -36,7 +36,7 @@ jobs:
           flags: unittests
 
   build:
-    name: Run build-cli
+    name: Run build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
