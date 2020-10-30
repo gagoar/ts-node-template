@@ -1,5 +1,3 @@
-# ts-node-template
-
 <p align="center">
   <h3 align="center">Template for typescript applications</h3>
 
