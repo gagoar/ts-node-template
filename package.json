@@ -12,8 +12,8 @@
   "scripts": {
     "precommit": "lint-staged",
     "test": "jest",
-    "build": "esbuild --bundle ./index.ts --platform=node --target=node12 --main-fields=main --outdir dist",
-    "build-cli": "esbuild --bundle ./src/bin/cli.ts --platform=node --target=node12 --main-fields=main  --outdir cli",
+    "build": "esbuild --bundle ./index.ts --platform=node --target=node12 --main-fields=main --outdir=dist",
+    "build-cli": "esbuild --bundle ./src/bin/cli.ts --platform=node --target=node12 --main-fields=main  --outdir=cli",
     "lint": "eslint src/* --ext .ts",
     "build-types": "tsc --emitDeclarationOnly --outDir types",
     "version": "auto-changelog -p && git add CHANGELOG.md",
