@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+# Sourcing husky helper script that consumes .huskyrc config and allows for debug parameters.
+. "$(dirname "$0")/_/husky.sh"
+
+# Hook actions below
+npx commitlint --edit $1
