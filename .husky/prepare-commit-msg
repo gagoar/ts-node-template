@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+# Sourcing husky helper script that consumes .huskyrc config and allows for debug parameters.
+. "$(dirname "$0")/_/husky.sh"
+
+# Hook actions below, in this case we utilize git-cz, which fallsback to regular `git commit`
+# if for whatever reason commitizen is not installed. /dev/tty is used to ensure that commitizen
+# can get user input.
+exec < /dev/tty && npx git-cz --hook || true

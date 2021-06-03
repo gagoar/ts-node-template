@@ -1,21 +1,31 @@
 on:
   push:
-    # Sequence of patterns matched against refs/tags
-    tags:
-      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+    branches:
+      - main
+
+name: Release
 
 jobs:
   npm:
     runs-on: ubuntu-latest
     steps:
+      - id: auth
+        uses: jnwng/github-app-installation-token-action@v2
+        with:
+          appId: ${{ secrets.GITHUB_APP_ID }}
+          installationId: ${{ secrets.GITHUB_APP_INSTALLATION_ID }}
+          privateKey: ${{ secrets.ORG_PRIVATE_KEY }}
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: main
       - uses: actions/setup-node@v2
         with:
           node-version: '12.x'
           registry-url: 'https://registry.npmjs.org'
-      - run: npm install
+      - run: npm run install
       - run: npm run build
-      - run: npm run build-cli
-      - run: npm publish
+      - run: npm run semantic-release
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GH_TOKEN: ${{ steps.auth.outputs.token }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

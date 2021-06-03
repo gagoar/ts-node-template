@@ -29,6 +29,30 @@
 - [commander](https://github.com/tj/commander.js/)
 - [cosmiconfig](https://github.com/davidtheclark/cosmiconfig)
 
+## Getting Started
+
+### Builds / Releases
+
+#### Github Tokens
+
+This template utilizes [github-app-installation-token-action](https://github.com/jnwng/github-app-installation-token-action) in order to interact with Github. As per the documentation, the following secrets are needed for proper operation:
+
+```
+  appId: ${{ secrets.GITHUB_APP_ID }}
+  installationId: ${{ secrets.GITHUB_APP_INSTALLATION_ID }}
+  privateKey: ${{ secrets.ORG_PRIVATE_KEY }}
+```
+
+#### NPM Tokens
+
+In order for the artifacts to be published, this template requires an NPM token exposed as:
+
+```
+  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+```
+
+If you wish to publish to a registry other than the default (`https://registry.npmjs.org`), such a change can be made in `.github/workflows/release.yml`.
+
 ## Contributing
 
 Contributions are what makes the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated **greatly appreciated**.
