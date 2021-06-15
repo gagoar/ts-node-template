@@ -118,7 +118,7 @@
     "auto-changelog": "2.2.1",
     "bufferutil": "4.0.2",
     "canvas": "2.6.1",
-    "esbuild": "0.8.44",
+    "esbuild": "0.12.8",
     "eslint": "7.14.0",
     "eslint-config-prettier": "7.2.0",
     "husky": "4.3.0",
