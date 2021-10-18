@@ -104,7 +104,7 @@
   "author": "Gago <xeroice@gmail.com>",
   "dependencies": {
     "commander": "7.0.0",
-    "cosmiconfig": "7.0.0",
+    "cosmiconfig": "7.0.1",
     "debug": "4.3.1",
     "ora": "5.3.0"
   },
