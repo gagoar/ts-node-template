@@ -8,7 +8,7 @@ on:
 
 jobs:
   getNodeVersion:
-    uses: gagoar/ts-node-template/.github/workflows/get_node_version.yml@gg/workflow-changes
+    uses: gagoar/ts-node-template/.github/workflows/get_node_version.yml@main
 
   lint:
     runs-on: ubuntu-latest
