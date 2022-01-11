@@ -99,7 +99,7 @@
   },
   "author": "Gago <xeroice@gmail.com>",
   "dependencies": {
-    "commander": "7.0.0",
+    "commander": "8.3.0",
     "cosmiconfig": "7.0.1",
     "debug": "4.3.3",
     "ora": "5.4.1"
