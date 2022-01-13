@@ -45,10 +45,10 @@ jobs:
           persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
           fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
 
-      - name: execute hook
-        uses: actions/setup-node@v2
+      - uses: actions/setup-node@v2
         with:
           node-version: '${{ inputs.node_version }}'
+      - name: execute hook
         run: ${{ inputs.hook_to_run }}
       - id: gitStatus
         name: find files changed
