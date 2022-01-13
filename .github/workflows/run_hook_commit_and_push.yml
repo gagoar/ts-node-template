@@ -26,6 +26,9 @@ on:
         type: string
         required: false
         default: 'Changes found on Workflow'
+    secrets:
+      token:
+        required: true
     outputs:
       changed_found:
         description: 'It will contain the changes found'
