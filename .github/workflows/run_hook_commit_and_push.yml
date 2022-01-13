@@ -46,6 +46,9 @@ jobs:
           fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
 
       - name: execute hook
+        uses: actions/setup-node@v2
+        with:
+          node-version: '${{ inputs.node_version }}'
         run: ${{ inputs.hook_to_run }}
       - id: gitStatus
         name: find files changed
