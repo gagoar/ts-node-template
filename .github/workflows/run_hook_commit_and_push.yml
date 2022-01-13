@@ -68,5 +68,5 @@ jobs:
         if: contains(steps.gitStatus.outputs.status, 'modified')
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ inputs.token }}
+          github_token: ${{ secrets.token }}
           branch: ${{ github.ref }}
