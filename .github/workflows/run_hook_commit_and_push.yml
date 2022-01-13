@@ -7,10 +7,6 @@ on:
         description: 'It will be the hook ro run. ex: npm run build'
         type: string
         required: true
-      token:
-        description: 'Personal Token or Installation token. This token should have commit permissions to append the changes to the PR, take a look at https://github.com/jnwng/github-app-installation-token-action for more information'
-        type: string
-        required: true
       committer_email:
         description: 'The email we want to commit with. We will use workflow at github.com by default'
         type: string
@@ -28,6 +24,7 @@ on:
         default: 'Changes found on Workflow'
     secrets:
       token:
+        description: 'Personal Token or Installation token. This token should have commit permissions to append the changes to the PR, take a look at https://github.com/jnwng/github-app-installation-token-action for more information'
         required: true
     outputs:
       changed_found:
