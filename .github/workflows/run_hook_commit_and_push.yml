@@ -1,0 +1,72 @@
+name: Run,Commit,Push
+
+on:
+  workflow_call:
+    inputs:
+      hook_to_run:
+        description: 'It will be the hook ro run. ex: npm run build'
+        type: string
+        required: true
+      node_version:
+        type: string
+        description: 'node version we will execute `hook_to_run` with'
+        required: true
+      committer_email:
+        description: 'The email we want to commit with. We will use action@github.com by default'
+        type: string
+        required: false
+        default: 'action@github.com'
+      committer_name:
+        description: 'The Name we want to commit with. We will Github Workflow by default'
+        type: string
+        required: false
+        default: 'Github Workflow'
+      committer_message:
+        description: "The commit message we will like to append. We will use 'Changes found on Workflow' by default "
+        type: string
+        required: false
+        default: 'Changes found on Workflow'
+
+    secrets:
+      token:
+        description: 'Personal Token or Installation token. This token should have commit permissions to append the changes to the PR, take a look at https://github.com/jnwng/github-app-installation-token-action for more information'
+        required: true
+    outputs:
+      changed_found:
+        description: 'It will contain the changes found'
+        value: ${{ jobs.gitStatus.outputs.status }}
+
+jobs:
+  runCommitPush:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+          fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '${{ inputs.node_version }}'
+      - name: execute hook
+        run: ${{ inputs.hook_to_run }}
+      - id: gitStatus
+        name: find files changed
+        run: |
+          STATUS=$(git diff --quiet && echo clean || echo modified)
+          echo "::set-output name=status::$STATUS"
+      - run: |
+          echo ${{ steps.gitStatus.outputs.status }}
+          echo ${{ contains(steps.gitStatus.outputs.status, 'modified') }}
+      - name: Commit changed Files
+        if: contains(steps.gitStatus.outputs.status, 'modified')
+        run: |
+          git config --local user.email "${{ inputs.committer_email }}"
+          git config --local user.name "${{ inputs.committer_name }}" 
+          git commit -m "${{ inputs.committer_message }}" -a
+      - name: Push Changes
+        if: contains(steps.gitStatus.outputs.status, 'modified')
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.token }}
+          branch: ${{ github.ref }}
