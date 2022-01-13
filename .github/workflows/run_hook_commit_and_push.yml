@@ -12,10 +12,10 @@ on:
         description: 'node version we will execute `hook_to_run` with'
         required: true
       committer_email:
-        description: 'The email we want to commit with. We will use workflow at github.com by default'
+        description: 'The email we want to commit with. We will use action@github.com by default'
         type: string
         required: false
-        default: 'workflow@github.com'
+        default: 'action@github.com'
       committer_name:
         description: 'The Name we want to commit with. We will Github Workflow by default'
         type: string
