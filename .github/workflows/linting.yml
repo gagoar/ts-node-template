@@ -1,0 +1,39 @@
+name: Lint
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  commitlint:
+    name: Linting PR Title / Commit messages
+    runs-on: ubuntu-latest
+    steps:
+      - id: auth
+        uses: jnwng/github-app-installation-token-action@v2
+        with:
+          appId: ${{ secrets.GITHUB_APP_ID }}
+          installationId: ${{ secrets.GITHUB_APP_INSTALLATION_ID }}
+          privateKey: ${{ secrets.ORG_PRIVATE_KEY }}
+      - uses: amannn/action-semantic-pull-request@v3.4.0
+        with:
+          validateSingleCommit: true
+        env:
+          GITHUB_TOKEN: ${{ steps.auth.outputs.token }}
+
+  getNodeVersion:
+    uses: gagoar/ts-node-template/.github/workflows/get_node_version.yml@main
+
+  lint:
+    runs-on: ubuntu-latest
+    needs: getNodeVersion
+    steps:
+      - uses: actions/checkout@main
+      - name: Setting node version to ${{ needs.getNodeVersion.outputs.node_version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: '${{ needs.getNodeVersion.outputs.node_version }}'
+      - run: npm install
+      - run: npm run lint
