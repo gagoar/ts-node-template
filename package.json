@@ -102,7 +102,7 @@
     "commander": "7.2.0",
     "cosmiconfig": "7.0.1",
     "debug": "4.3.4",
-    "ora": "5.4.1"
+    "ora": "6.3.1"
   },
   "devDependencies": {
     "@types/debug": "4.1.7",
