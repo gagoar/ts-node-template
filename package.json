@@ -105,7 +105,7 @@
     "ora": "5.4.1"
   },
   "devDependencies": {
-    "@types/debug": "4.1.7",
+    "@types/debug": "4.1.12",
     "@types/jest": "27.5.2",
     "@types/node": "16.11.12",
     "@typescript-eslint/eslint-plugin": "5.9.1",
